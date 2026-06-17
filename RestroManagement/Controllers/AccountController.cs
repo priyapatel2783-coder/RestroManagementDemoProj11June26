@@ -36,12 +36,13 @@ namespace RestroManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(AppUser model)
         {
+            model.UserRole = "GUEST";
             if (ModelState.IsValid)
             {
                 _logger.LogInformation("Attempting to register user with email: {Email}", model.Email);
                 model.UserName = model.Email;
                 // Hardcode role to User for standard registration
-                var result = await _userService.AddUser(model, new List<string> { "User" });
+                var result = await _userService.AddUser(model, new List<string> { "GUEST" });
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User {Email} registered successfully.", model.Email);
@@ -83,7 +84,7 @@ namespace RestroManagement.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Merchant");
+                    await _userManager.AddToRoleAsync(user, "Restaurant");
 
                     var merchant = new Merchant
                     {
@@ -140,7 +141,8 @@ namespace RestroManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            return await ReDirectIfLoggedIn();
+            return View();
+            //return await ReDirectIfLoggedIn();
         }
 
         [HttpPost]

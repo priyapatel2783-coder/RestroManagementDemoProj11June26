@@ -16,10 +16,16 @@ namespace RestroManagement.DbModels.User
         [Display(Name = "Last Name")]
         public string LName { get; set; } = string.Empty;
 
-        [NotMapped]
-        public string FullName => $"{FName} {LName}";
+        //[NotMapped]
+        //public string FullName => $"{FName} {LName}";
+        [Required(ErrorMessage = "Email is required")]
+        [StringLength(50)]
+        [Display(Name = "Email")]
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
+        public string Email { get; set; } = string.Empty;
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
 
-        [NotMapped]
+        //[NotMapped]
         [Required(ErrorMessage = "Password is required")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters long")]
         public string Password { get; set; } = string.Empty;
@@ -35,7 +41,7 @@ namespace RestroManagement.DbModels.User
 
         [NotMapped]
         [Required(ErrorMessage = "Please select a role")]
-        public string UserRole { get; set; } = string.Empty;
+        public string ?UserRole { get; set; } = string.Empty;
 
 
     }
