@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestroManagement.Migrations
 {
     /// <inheritdoc />
-    public partial class reset : Migration
+    public partial class rs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

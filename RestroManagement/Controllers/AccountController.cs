@@ -174,11 +174,10 @@ namespace RestroManagement.Controllers
                 if (user == null)
                 {
                     return View("Login");
-                }
+                } ///Guest/Home/index
                 var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Contains("SuperAdmin")) return RedirectToAction("Index", "Home");
-                else if (roles.Contains("Merchant")) return RedirectToAction("Index", "Home");
-                else if (roles.Contains("User")) return RedirectToAction("Index", "Home");
+                if (roles.Contains("Guest")) return RedirectToAction("Index", "Home","Guest");
+                 else if (roles.Contains("SuperAdmin")) return RedirectToAction("Index", "Home","Admin");
                 else return RedirectToAction("Index", "Home");
             }
             else

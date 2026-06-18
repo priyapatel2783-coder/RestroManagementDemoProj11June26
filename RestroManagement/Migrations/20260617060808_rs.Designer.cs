@@ -12,8 +12,8 @@ using RestroManagement.Data;
 namespace RestroManagement.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260617053231_reset")]
-    partial class reset
+    [Migration("20260617060808_rs")]
+    partial class rs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
