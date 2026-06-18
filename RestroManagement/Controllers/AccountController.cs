@@ -156,8 +156,9 @@ namespace RestroManagement.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User {UserName} logged in successfully.", model.LoginUserName);
-                    return await ReDirectIfLoggedIn();
+                    return RedirectToAction("Index", "Admin");
                 }
+                
                 else
                 {
                     _logger.LogWarning("Invalid login attempt for user: {UserName}", model.LoginUserName);
@@ -176,9 +177,12 @@ namespace RestroManagement.Controllers
                     return View("Login");
                 } ///Guest/Home/index
                 var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Contains("Guest")) return RedirectToAction("Index", "Home","Guest");
-                 else if (roles.Contains("SuperAdmin")) return RedirectToAction("Index", "Home","Admin");
-                else return RedirectToAction("Index", "Home");
+                if (roles.Contains("Guest")) 
+                    return RedirectToAction("Index", "Home","Guest");
+                 else if (roles.Contains("SuperAdmin")) 
+                    return RedirectToAction("Index", "Home","Admin");
+                else 
+                    return RedirectToAction("Index", "Home");
             }
             else
                 return View("Login");
@@ -231,7 +235,7 @@ namespace RestroManagement.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //------------api ..........................

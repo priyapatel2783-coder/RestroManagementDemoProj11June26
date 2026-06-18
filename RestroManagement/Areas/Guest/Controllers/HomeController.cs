@@ -10,5 +10,11 @@ namespace RestroManagement.Areas.Guest.Controllers
             return View();
         }
 
+        // GET: /Guest/Home/Dashboard
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
     }
 }
