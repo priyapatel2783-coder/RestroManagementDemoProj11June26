@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="container py-5">
+
+    <!-- Page Heading -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-danger">🛒 Your Cart</h1>
+        <p class="lead text-muted">
+            Review your selected items before checkout.
+        </p>
+    </div>
+
+    <!-- Cart Card -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+
+                    <table class="table table-bordered text-center align-middle">
+                        <thead class="table-danger">
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>@TempData["Item"]</td>
+                                <td>₹@TempData["Price"]</td>
+                                <td>@TempData["Quantity"]</td>
+                                <td>
+                                    ₹@(Convert.ToInt32(TempData["Price"]) * Convert.ToInt32(TempData["Quantity"]))
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Summary -->
+                    <div class="text-end mt-4">
+                        <h4 class="text-success">
+                            Grand Total:
+                            ₹@(Convert.ToInt32(TempData["Price"]) * Convert.ToInt32(TempData["Quantity"]))
+                        </h4>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-controller="Home"
+                           asp-action="Menu"
+                           class="btn btn-outline-danger btn-lg">
+                            ⬅ Continue 
+                        </a>
+
+                        <a asp-controller="Order"
+                           asp-action="Checkout"
+                           class="btn btn-danger btn-lg">
+                            Proceed to place order
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

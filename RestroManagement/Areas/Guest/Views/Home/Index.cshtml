@@ -1,1 +1,146 @@
-﻿<h3> Welcome to guest home index </h3>
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+
+<div class="container-fluid py-5 text-dark rounded shadow mb-5"
+     style="background: linear-gradient(180deg, var(--light-bg), #fffefc);">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">🍽 Welcome to Restro</h1>
+        <p class="lead mt-3">
+            Delicious meals delivered fresh to your doorstep.
+            Explore our menu and order your favorite dishes today.
+        </p>
+
+       
+        <a asp-controller="Home" asp-action="Menu"
+           class="btn btn-primary btn-lg mt-3 px-4 text-white"
+           style="background-color: var(--primary-color); border-color: var(--primary-color);">
+            <i class="bi bi-grid"></i> Explore Menu
+        </a>
+    </div>
+   
+
+</div>
+
+<!-- Features -->
+
+<div class="container mb-5">
+    <div class="row text-center g-4">
+
+        
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <i class="bi bi-clock-history display-4" style="color: var(--primary-color);"></i>
+                    <h4 class="mt-3">Fast Delivery</h4>
+                    <p>
+                        Get your favorite food delivered quickly and safely.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <i class="bi bi-star-fill display-4" style="color: var(--secondary-color);"></i>
+                    <h4 class="mt-3">Best Quality</h4>
+                    <p>
+                        Fresh ingredients and delicious recipes prepared daily.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <i class="bi bi-shield-check display-4" style="color: var(--primary-color);"></i>
+                    <h4 class="mt-3">Safe & Secure</h4>
+                    <p>
+                        Secure ordering and trusted delivery experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>
+
+<!-- Popular Categories -->
+
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Popular Categories</h2>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 text-center">
+                <div class="card-body"><a asp-controller="Home" asp-action="Menu">
+                    <i class="bi bi-cup-hot display-3" style="color: var(--primary-color);"></i>
+                    <h5 class="mt-3">Breakfast</h5></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 text-center">
+                <div class="card-body">
+                    <i class="bi bi-egg-fried display-3" style="color: var(--secondary-color);"></i>
+                    <h5 class="mt-3">Lunch</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 text-center">
+                <div class="card-body">
+                    <i class="bi bi-cake2 display-3" style="color: var(--primary-color);"></i>
+                    <h5 class="mt-3">Desserts</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 text-center">
+                <div class="card-body">
+                    <i class="bi bi-cup-straw display-3" style="color: var(--secondary-color);"></i>
+                    <h5 class="mt-3">Beverages</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+
+
+</div>
+
+<!-- Call To Action -->
+
+<div class="container mb-5">
+    <div class="card border-0 shadow text-center text-dark"
+         style="background: linear-gradient(180deg, var(--light-bg), #fffefc);">
+        <div class="card-body py-5">
+            <h2>Hungry?</h2>
+            <p class="lead">
+                Browse our menu and place your order now.
+            </p>
+
+            
+            <a asp-controller="Menu"
+               asp-action="Index"
+               class="btn btn-primary btn-lg text-white"
+               style="background-color: var(--primary-color); border-color: var(--primary-color);">
+                Order Now
+            </a>
+        </div>
+    </div>
+    
+
+</div>

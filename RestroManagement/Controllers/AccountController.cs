@@ -126,7 +126,7 @@ namespace RestroManagement.Controllers
 
                     await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, lockoutOnFailure: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
 
                 foreach (var error in result.Errors)

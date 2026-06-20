@@ -1,0 +1,194 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+}
+
+<div class="container py-5">
+
+    <!-- Page Heading -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-danger">🍴 Our Delicious Menu</h1>
+        <p class="lead text-muted">
+            Explore our freshly prepared dishes made with love.
+        </p>
+    </div>
+
+    <!-- BREAKFAST -->
+    <h2 class="text-danger mb-4">🍳 Breakfast</h2>
+    <div class="row g-4">
+
+        <!-- Pancakes -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Pancakes 🥞</h4>
+                    <h5 class="text-danger">₹149</h5>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <button class="btn btn-outline-danger" onclick="decreaseQuantity('qty1')">−</button>
+                        <input type="text" id="qty1" value="1" class="form-control text-center mx-2" style="width:60px;" readonly />
+                        <button class="btn btn-outline-success" onclick="increaseQuantity('qty1')">+</button>
+                    </div>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="ItemName" value="Pancakes" />
+                        <input type="hidden" name="Price" value="149" />
+                        <input type="hidden" id="cartQty1" name="Quantity" value="1" />
+                        <button type="submit" class="btn btn-danger w-100"
+                                onclick="syncQuantity('qty1','cartQty1')">
+                            Add to Cart 🛒
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sandwich -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Veg Sandwich 🥪</h4>
+                    <h5 class="text-danger">₹129</h5>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <button class="btn btn-outline-danger" onclick="decreaseQuantity('qty2')">−</button>
+                        <input type="text" id="qty2" value="1" class="form-control text-center mx-2" style="width:60px;" readonly />
+                        <button class="btn btn-outline-success" onclick="increaseQuantity('qty2')">+</button>
+                    </div>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="ItemName" value="Veg Sandwich" />
+                        <input type="hidden" name="Price" value="129" />
+                        <input type="hidden" id="cartQty2" name="Quantity" value="1" />
+                        <button type="submit" class="btn btn-danger w-100"
+                                onclick="syncQuantity('qty2','cartQty2')">
+                            Add to Cart 🛒
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LUNCH -->
+    <h2 class="text-danger mt-5 mb-4">🍛 Lunch</h2>
+    <div class="row g-4">
+
+        <!-- Biryani -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Chicken Biryani 🍛</h4>
+                    <h5 class="text-danger">₹349</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pasta -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>White Sauce Pasta 🍝</h4>
+                    <h5 class="text-danger">₹249</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DINNER -->
+    <h2 class="text-danger mt-5 mb-4">🍕 Dinner</h2>
+    <div class="row g-4">
+
+        <!-- Pizza -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Cheese Pizza 🍕</h4>
+                    <h5 class="text-danger">₹299</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Burger -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Chicken Burger 🍔</h4>
+                    <h5 class="text-danger">₹199</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BEVERAGES -->
+    <h2 class="text-danger mt-5 mb-4">☕ Beverages</h2>
+    <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Cold Coffee ☕</h4>
+                    <h5 class="text-danger">₹119</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DESSERT -->
+    <h2 class="text-danger mt-5 mb-4">🍰 Desserts</h2>
+    <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587"
+                     class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h4>Chocolate Cake 🎂</h4>
+                    <h5 class="text-danger">₹199</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-5">
+        <a asp-controller="Home" asp-action="Index"
+           class="btn btn-outline-danger btn-lg px-4">
+            ⬅ Back to Home
+        </a>
+    </div>
+
+</div>
+
+<script>
+    function increaseQuantity(id) {
+        let qty = document.getElementById(id);
+        qty.value = parseInt(qty.value) + 1;
+    }
+
+    function decreaseQuantity(id) {
+        let qty = document.getElementById(id);
+        if (parseInt(qty.value) > 1) {
+            qty.value = parseInt(qty.value) - 1;
+        }
+    }
+
+    function syncQuantity(inputId, hiddenId) {
+        document.getElementById(hiddenId).value =
+            document.getElementById(inputId).value;
+    }
+</script>

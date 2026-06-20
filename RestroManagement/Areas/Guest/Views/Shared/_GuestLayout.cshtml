@@ -3,73 +3,227 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Restro Admin</title>
+    <title>@ViewData["Title"] Restro User Dashboard</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <style>
-        :root {
-            --sidebar-width: 250px;
-            --admin-primary: #2c3e50;
-            --admin-secondary: #34495e;
-            --admin-accent: #3498db;
-        }
+            :root {
+                /* Match main landing palette */
+                --primary-color: #E63946; /* landing --primary */
+                --primary-hover: #d62d3a;
+                --secondary-color: #FFB703; /* landing --secondary */
+                --dark-color: #1F2937; /* landing --dark */
+                --light-bg: #FFF8F3; /* landing --light-bg */
+                --text-main: #374151;
+            }
 
-        body {
-            background-color: #f8f9fa;
-        }
+            body {
+                background-color: var(--light-bg);
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
 
-        #sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background-color: var(--admin-primary);
-            color: white;
-            padding-top: 20px;
-            z-index: 1000;
-        }
+            /* Header (light, aligned with landing) */
+            .navbar-custom {
+                background: linear-gradient(180deg, #ffffff, var(--light-bg));
+                border-bottom: 1px solid rgba(31,41,55,0.06);
+            }
 
-        #sidebar .nav-link {
-            color: rgba(255,255,255,0.8);
-            padding: 12px 20px;
-            border-left: 4px solid transparent;
-        }
+                .navbar-custom .navbar-brand,
+                .navbar-custom .nav-link {
+                    color: var(--text-main) !important;
+                    transition: 0.15s ease;
+                }
 
-        #sidebar .nav-link:hover, #sidebar .nav-link.active {
-            color: white;
-            background-color: var(--admin-secondary);
-            border-left-color: var(--admin-accent);
-        }
+                    .navbar-custom .navbar-brand { color: var(--primary-color) !important; }
 
-        #sidebar .nav-link i {
-            margin-right: 10px;
-        }
+                    .navbar-custom .nav-link:hover {
+                        color: var(--primary-color) !important;
+                    }
 
-        #main-content {
-            margin-left: var(--sidebar-width);
-            padding: 30px;
-        }
+            .navbar-toggler {
+                border: none;
+            }
 
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            border-radius: 0.75rem;
-        }
+            /* Main Content */
+            .content-wrapper {
+                flex: 1;
+                padding: 30px 0;
+            }
 
-        .btn-primary {
-            background-color: var(--admin-accent);
-            border-color: var(--admin-accent);
-        }
+            /* Footer (dark like landing footer) */
+            .footer-custom {
+                background: var(--dark-color);
+                color: rgba(255,255,255,0.85);
+                padding: 40px 0;
+                margin-top: auto;
+            }
+
+                .footer-custom h5 {
+                    color: var(--white);
+                    font-weight: 600;
+                }
+
+                .footer-custom a {
+                    color: rgba(255,255,255,0.9);
+                    text-decoration: none;
+                    transition: 0.15s ease;
+                }
+
+                    .footer-custom a:hover {
+                        color: var(--primary-color);
+                    }
+
+            .social-icons a {
+                font-size: 1.2rem;
+                margin-right: 15px;
+                color: rgba(255,255,255,0.9);
+                transition: 0.15s ease;
+            }
+
+                .social-icons a:hover {
+                    color: var(--primary-color);
+                }
+
+            hr.bg-light {
+                border-color: rgba(255,255,255,0.06);
+            }
+
+            .text-center small {
+                color: rgba(255,255,255,0.6);
+            }
     </style>
 </head>
 <body>
-        <h1> Guest Layout .... h1/>
-       
-    <main role="main">
-        @RenderBody()
-    </main>
-     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                     Restro
+                </a>
+
+                <button class="navbar-toggler bg-light" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Menu">
+                                <i class="bi bi-grid"></i> Menu
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Orders" asp-action="MyOrders">
+                                <i class="bi bi-bag-check"></i> My Orders
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Cart">
+                                <i class="bi bi-cart"></i> Cart
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Profile" asp-action="Index">
+                                <i class="bi bi-person-circle"></i> My Profile
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-warning" asp-controller="Account" asp-action="Login">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container content-wrapper">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <h5>🍽 Restro</h5>
+                    <p>
+                        Delicious food delivered fresh to your doorstep.
+                        Experience the best dining with us.
+                    </p>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Menu" asp-action="Index">Menu</a></li>
+                        <li><a asp-controller="Orders" asp-action="MyOrders">Orders</a></li>
+                        <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>
+                        <i class="bi bi-geo-alt"></i> Lucknow, Uttar Pradesh
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone"></i> +91 98765 43210
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope"></i> support@restro.com
+                    </p>
+
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="bg-light">
+
+            <div class="text-center">
+                <small>
+                    © @DateTime.Now.Year Restro. All Rights Reserved.
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
