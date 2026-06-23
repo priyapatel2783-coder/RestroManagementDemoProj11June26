@@ -156,7 +156,7 @@ namespace RestroManagement.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User {UserName} logged in successfully.", model.LoginUserName);
-                    return RedirectToAction("Index", "Admin");
+                    return await ReDirectIfLoggedIn();
                 }
                 
                 else
@@ -177,10 +177,14 @@ namespace RestroManagement.Controllers
                     return View("Login");
                 } ///Guest/Home/index
                 var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Contains("Guest")) 
-                    return RedirectToAction("Index", "Home","Guest");
-                 else if (roles.Contains("SuperAdmin")) 
-                    return RedirectToAction("Index", "Home","Admin");
+                if (roles.Contains("Guest"))
+                    return RedirectToAction("Index", "Home", new { area = "Guest" });
+
+                else if (roles.Contains (  "Restaurant "))
+                    return RedirectToAction("Index", "Home", new { area = "Restaurant" });
+
+                else if (roles.Contains("SuperAdmin"))
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 else 
                     return RedirectToAction("Index", "Home");
             }

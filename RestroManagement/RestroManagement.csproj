@@ -27,6 +27,8 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Guest\Data\" />
     <Folder Include="Areas\Guest\Models\" />
+    <Folder Include="Areas\Restaurant\Data\" />
+    <Folder Include="Areas\Restaurant\Models\" />
   </ItemGroup>
 
 </Project>

@@ -182,7 +182,7 @@
 
     function decreaseQuantity(id) {
         let qty = document.getElementById(id);
-        if (parseInt(qty.value) > 1) {
+        if (parseInt(qty.value) > 0) {
             qty.value = parseInt(qty.value) - 1;
         }
     }
