@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using RestroManagement.DbModels;
 using RestroManagement.DbModels.User;
+using RestroManagement.ViewModels;
 
 namespace RestroManagement.Data
 {
@@ -30,7 +31,7 @@ namespace RestroManagement.Data
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<MerchantStaff> MerchantStaffs { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

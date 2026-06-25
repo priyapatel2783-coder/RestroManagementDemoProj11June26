@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Restaurant Dashboard";
+}
+
+<div class="container py-5">
+
+    <!-- Dashboard Heading -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-danger">🍴 Restaurant Dashboard</h1>
+        <p class="lead text-muted">Manage your restaurant operations easily</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h3 class="text-primary">120</h3>
+                <p>Total Orders</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h3 class="text-success">₹25,000</h3>
+                <p>Revenue</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h3 class="text-warning">35</h3>
+                <p>Menu Items</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center p-4">
+                <h3 class="text-danger">18</h3>
+                <p>Pending Orders</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Management Section -->
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center p-4">
+                <h4>📋 Manage Orders</h4>
+                <p>View and update customer orders.</p>
+                <a asp-controller="Orders" asp-action="Index" class="btn btn-primary">
+                    View Orders
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center p-4">
+                <h4>🍔 Manage Menu</h4>
+                <p>Add, edit or remove food items.</p>
+                <a asp-controller="Menu" asp-action="Index" class="btn btn-success">
+                    Manage Menu
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0 text-center p-4">
+                <h4>👥 Customers</h4>
+                <p>Track customer details and orders.</p>
+                <a asp-controller="Customers" asp-action="Index" class="btn btn-warning">
+                    View Customers
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Orders Table -->
+    <div class="mt-5">
+        <h2 class="mb-4 text-danger">Recent Orders</h2>
+
+        <table class="table table-bordered table-hover shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Food Item</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>#101</td>
+                    <td>Rahul</td>
+                    <td>Pizza</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>₹450</td>
+                </tr>
+
+                <tr>
+                    <td>#102</td>
+                    <td>Priya</td>
+                    <td>Burger</td>
+                    <td><span class="badge bg-success">Completed</span></td>
+                    <td>₹250</td>
+                </tr>
+
+                <tr>
+                    <td>#103</td>
+                    <td>Aman</td>
+                    <td>Pasta</td>
+                    <td><span class="badge bg-danger">Cancelled</span></td>
+                    <td>₹300</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

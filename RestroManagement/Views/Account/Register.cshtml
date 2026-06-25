@@ -148,6 +148,7 @@
 
         <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="error-summary small" style="display: @(ViewData.ModelState.IsValid ? "none" : "block")"></div>
+            <input type="hidden" asp-for="UserRole" value="GUEST" />
 
             <div class="row">
                 <div class="col-md-6 form-group">

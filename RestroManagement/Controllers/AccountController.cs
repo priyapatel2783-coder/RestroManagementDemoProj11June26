@@ -36,12 +36,13 @@ namespace RestroManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(AppUser model)
         {
+            model.UserRole = "GUEST";
             if (ModelState.IsValid)
             {
                 _logger.LogInformation("Attempting to register user with email: {Email}", model.Email);
                 model.UserName = model.Email;
                 // Hardcode role to User for standard registration
-                var result = await _userService.AddUser(model, new List<string> { "User" });
+                var result = await _userService.AddUser(model, new List<string> { "GUEST" });
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User {Email} registered successfully.", model.Email);
@@ -83,7 +84,7 @@ namespace RestroManagement.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Merchant");
+                    await _userManager.AddToRoleAsync(user, "Restaurant");
 
                     var merchant = new Merchant
                     {
@@ -125,7 +126,7 @@ namespace RestroManagement.Controllers
 
                     await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, lockoutOnFailure: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
 
                 foreach (var error in result.Errors)
@@ -140,7 +141,8 @@ namespace RestroManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            return await ReDirectIfLoggedIn();
+            return View();
+            //return await ReDirectIfLoggedIn();
         }
 
         [HttpPost]
@@ -156,6 +158,7 @@ namespace RestroManagement.Controllers
                     _logger.LogInformation("User {UserName} logged in successfully.", model.LoginUserName);
                     return await ReDirectIfLoggedIn();
                 }
+                
                 else
                 {
                     _logger.LogWarning("Invalid login attempt for user: {UserName}", model.LoginUserName);
@@ -172,12 +175,18 @@ namespace RestroManagement.Controllers
                 if (user == null)
                 {
                     return View("Login");
-                }
+                } ///Guest/Home/index
                 var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Contains("SuperAdmin")) return RedirectToAction("Index", "Home");
-                else if (roles.Contains("Merchant")) return RedirectToAction("Index", "Home");
-                else if (roles.Contains("User")) return RedirectToAction("Index", "Home");
-                else return RedirectToAction("Index", "Home");
+                if (roles.Contains("Guest"))
+                    return RedirectToAction("Index", "Home", new { area = "Guest" });
+
+                else if (roles.Contains (  "Restaurant "))
+                    return RedirectToAction("Index", "Home", new { area = "Restaurant" });
+
+                else if (roles.Contains("SuperAdmin"))
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                else 
+                    return RedirectToAction("Index", "Home");
             }
             else
                 return View("Login");
@@ -230,7 +239,7 @@ namespace RestroManagement.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //------------api ..........................
