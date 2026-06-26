@@ -6,7 +6,7 @@ namespace RestroManagement.Areas.Guest.Controllers
     [Area("Guest")]
     public class HomeController: Controller
     {
-        AppDBContext dBContext;
+         private AppDBContext dBContext;
 
         public HomeController(AppDBContext _dBContext)
         {
