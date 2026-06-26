@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConStr")));
+        builder.Configuration.GetConnectionString("LiveDB")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 {
