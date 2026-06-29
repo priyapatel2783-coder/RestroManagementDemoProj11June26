@@ -20,7 +20,7 @@ namespace RestroManagement.Areas.Guest.Controllers
         {
             dBContext = _dBContext;
         }
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             return View();
         }
