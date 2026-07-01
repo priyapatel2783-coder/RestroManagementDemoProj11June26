@@ -255,18 +255,28 @@ namespace RestroManagement.Areas.Admin.Controllers
             return RedirectToAction(nameof(Edit), new { id = portion.FoodItemId });
         }
 
-        
-         public async Task<IActionResult> DeletePortion(int id)
+        [HttpPost]
+        public async Task<IActionResult> DeletePortion(int id)
         {
             var portion = await _context.FoodItemPortions.FindAsync(id);
-            if (portion != null)
+
+            if (portion == null)
             {
-                int foodItemId = portion.FoodItemId;
-                _context.FoodItemPortions.Remove(portion);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Edit), new { id = foodItemId });
+                return Json(new
+                {
+                    success = false,
+                    message = "Portion not found."
+                });
             }
-            return NotFound();
+
+            _context.FoodItemPortions.Remove(portion);
+            await _context.SaveChangesAsync();
+
+            return Json(new
+            {
+                success = true,
+                message = "Portion deleted successfully."
+            });
         }
 
         public async Task<IActionResult> Delete(int id)

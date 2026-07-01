@@ -166,22 +166,28 @@
                                 {
                                     foreach (var p in Model.Portions)
                                     {
-                                        <tr>
+                                        <tr id="portionRow-@p.Id">
                                             <td class="fw-bold">@p.Name</td>
                                             <td>₹@p.Price</td>
                                             <td>₹@p.Cost</td>
                                             <td>@p.BaseQuantity</td>
                                             <td class="text-end">
-                                                <a href="/Admin/FoodItems/DeletePortion/@p.Id" class="btn btn-sm text-danger" onclick="return confirm('Delete this portion?')">
+                                                <button type="button"
+                                                        class="btn btn-sm text-danger btnDeletePortion"
+                                                        data-id="@p.Id">
                                                     <i class="bi bi-trash"></i>
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     }
                                 }
                                 else
                                 {
-                                    <tr><td colspan="5" class="text-center text-muted py-3">No portions added yet.</td></tr>
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted py-3">
+                                            No portions added yet.
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -271,6 +277,84 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        $(document).on("click", ".btnDeletePortion", function () {
+
+        var id = $(this).data("id");
+        var row = $("#portionRow-" + id);
+
+        Swal.fire({
+        title: "Delete Portion?",
+        text: "This portion will be permanently deleted.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#dc3545",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Yes, Delete",
+        cancelButtonText: "Cancel"
+        }).then((result) => {
+
+        if (result.isConfirmed) {
+
+        $.ajax({
+
+        url: "/Admin/FoodItems/DeletePortion",
+
+        type: "POST",
+
+        data: { id: id },
+
+        success: function (response) {
+
+        if (response.success) {
+
+        row.fadeOut(300, function () {
+        $(this).remove();
+        });
+
+        Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: response.message,
+        timer: 1500,
+        showConfirmButton: false
+        });
+
+        }
+        else {
+
+        Swal.fire(
+        "Error",
+        response.message,
+        "error"
+        );
+
+        }
+
+        },
+
+        error: function () {
+
+        Swal.fire(
+        "Error",
+        "Something went wrong.",
+        "error"
+        );
+
+        }
+
+        });
+
+        }
+
+        });
+
+        });
+
+    </script>
     <script>
         let totalNewImages = 0;
 
