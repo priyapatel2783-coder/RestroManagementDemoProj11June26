@@ -1,26 +1,26 @@
 @model IEnumerable<RestroManagement.DbModels.Order>
 
 @{
-	ViewData["Title"] = "Orders";
+    ViewData["Title"] = "Orders";
 }
 
 <h2 class="fw-bold mb-4">Orders Management</h2>
 
 <div class="card p-4">
-	<div class="table-responsive">
-		<table class="table table-hover align-middle">
-			<thead class="table-light">
-				<tr>
-					<th>ID</th>
-					<th>Customer</th>
-					<th>Mobile</th>
-					<th>OrderItem</th>
-					<th>Date</th>
-					<th>Total</th>
-					<th class="text-end">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Mobile</th>
+                    <th>Order Items</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 				@foreach (var item in Model)
 				{
 					<tr>
@@ -34,7 +34,7 @@
 						else if (item.Items.Count == 1)
 						{
 							<td>
-								@item.Items.FirstOrDefault().FoodItem.Name  
+								@item.Items.FirstOrDefault().FoodItem.Name
 							</td>
 						}
 						else
@@ -58,11 +58,11 @@
 						</td>
 					</tr>
 				}
-				@if (!Model.Any())
-				{
-					<tr><td colspan="6" class="text-center py-5 text-muted">No orders found.</td></tr>
-				}
-			</tbody>
-		</table>
-	</div>
+
+				@if (!Model.Any()) {
+                    <tr><td colspan="6" class="text-center py-5 text-muted">No orders found.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

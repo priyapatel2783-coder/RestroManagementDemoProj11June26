@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestroManagement.Data;
@@ -5,6 +6,8 @@ using RestroManagement.Data;
 namespace RestroManagement.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "Admin")]
+
     public class DashboardController : Controller
     {
         private readonly AppDBContext _context;
@@ -23,6 +26,7 @@ namespace RestroManagement.Areas.Admin.Controllers
 
             var recentOrders = await _context.Orders
                 .Include(o => o.Items)
+                   .ThenInclude(oi => oi.FoodItem)
                 .OrderByDescending(o => o.OrderDate)
                 .Take(5)
                 .ToListAsync();

@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestroManagement.Data;
 using RestroManagement.DbModels;
 
-namespace RestroManagement.Areas.Admin.Controllers
+namespace RestroManagement.Areas.Restaurant.Controllers
 {
-    [Area("Admin")]
-    //[Authorize(Roles = "Admin")]
+    [Area("Restaurant")]
+    //[Authorize(Roles = "Restaurant")]
     public class CategoriesController : Controller
     {
         private readonly AppDBContext _context;
@@ -96,7 +96,7 @@ namespace RestroManagement.Areas.Admin.Controllers
             if (id == null) return NotFound();
             var category = await _context.MenuCategories.FindAsync(id);
             if (category == null) return NotFound();
-            
+
             _context.MenuCategories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
